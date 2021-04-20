@@ -1,0 +1,299 @@
+{% extends "title_base.html"  %}<!-- extends引用统一的模板文件 -->
+{% load static %}
+
+{% block header_extends %}<!-- 第一个块 -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}">
+    <!-- <link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}"> -->
+{% endblock %}
+
+{% block content  %}
+<body class="index">
+    <!-- 最顶部的导航栏 -->
+	<div class="header">
+		<a href="/" class="logo" title="首页"><img alt="Cyberpunk" src="../../static/image/logo.png" width="214" height="80";></a>
+		<div class="search-box">
+            <!-- html的表单 -->
+            <form id="searchForm" action="{% url 'search' 1 %}" method="post" target="_blank">
+            {% csrf_token %}
+                <div class="search-keyword">
+                    <input name="kword" type="text" class="keyword" maxlength="120" placeholder="热门书籍：C++ 从入门到放弃" />
+                </div>
+                <input id="subSerch" type="submit" class="search-button" value="搜 索" />
+            </form>
+            <div id="suggest" class="search-suggest"></div>
+            <!-- 在搜索框下面显示热门学习资源 -->
+            <!-- <div class="search-hot-words">
+                {% for song in search_song  %}
+                    <a target="play" href="{% url 'play' song.song.song_id %}" >{{ song.song.song_name }}</a>
+                {% endfor  %}
+            </div> -->
+  	    </div>
+	</div>
+    <!-- 搜索框下面的导航栏 -->
+	<div class="nav-box">
+        <div class="nav-box-inner">
+            <ul class="nav clearfix">
+                <li class="nav_1"><a href="/"><b>首页</b></a></li>
+                <li><a href="{% url 'ranking' %}" target="_blank"><b>热门排行</b></a></li>
+                <li><a href="{% url 'home' 1 %}" target="_blank"><b>用户中心</b></a></li>
+            </ul>
+        </div>
+    </div><!--end nav-box-->
+    <!-- 最左侧的分类导航栏，中间的大图片，右侧栏热门书籍模块 -->
+    <!-- 书单推荐 -->
+    <div class="song_reco">
+        <div class="song_con">
+            <h2 class="tit">书单推荐</h2>
+            <ul class="reco_list">
+                <li>
+                    <div class="list_pic">
+                        <a href="#"><img src="../../static/image/11.png" alt=""></a>
+                    </div>
+                    <h4 class="list_tit"><a href="{% url 'index'%}">Python</a></h4>
+                </li>
+                <li>
+                    <div class="list_pic">
+                        <a href="#"><img src="../../static/image/99.jpg" alt=""></a>
+                    </div>
+                    <h4 class="list_tit"><a href="#">C++</a></h4>
+                </li>
+                <li>
+                    <div class="list_pic">
+                        <a href="#"><img src="../../static/image/22.png" alt=""></a>
+                    </div>
+                    <h4 class="list_tit"><a href="#">Java</a></h4>
+                </li>
+                <li>
+                    <div class="list_pic">
+                        <a href="#"><img src="../../static/image/77.jpg" alt=""></a>
+                    </div>
+                    <h4 class="list_tit"><a href="#">算法</a></h4>
+                </li>
+                <li class="nomargin">
+                    <div class="list_pic">
+                        <a href="#"><img src="../../static/image/96.png" alt=""></a>
+                    </div>
+                    <h4 class="list_tit"><a href="#">数据库</a></h4>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 资源推荐 -->
+    <div class="new_song">
+        <div class="song_con">
+            <h2 class="tit">资源推荐</h2>
+            <ul class="song_list">
+                <li>
+                    <div class="pic">
+                        <a href="https://www.bilibili.com/video/BV1Az4y1U7f5"><img src="../../static/image/10002.png" alt=""></a>
+                    </div>
+                    <div class="txt">
+                        <h3><a href="https://www.bilibili.com/video/BV1Az4y1U7f5"></a>JavaScript基础全套教程</a></h3>
+                        <p>来源：billbill</a></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="pic">
+                        <a href="https://www.bilibili.com/video/BV1ty4y1x7x"><img src="../../static/image/10001.png" alt=""></a>
+                    </div>
+                    <div class="txt">
+                        <h3><a href="https://www.bilibili.com/video/BV1ty4y1x7xP">MIT:Python编程语言公开课</a></h3>
+                        <p>来源：billbill</p>
+                    </div>
+                </li>
+                <li class="nomargin">
+                    <div class="pic">
+                        <a href="https://www.icourse163.org/course/PKU-1206307812?tid=1461783459"><img src="../../static/image/10003.png" alt=""></a>
+                    </div>
+                    <div class="txt">
+                        <h3><a href="https://www.icourse163.org/course/PKU-1206307812?tid=1461783459">数据结构与算法Python版</a></h3>
+                        <p>来源:mooc</a></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="pic">
+                        <a href="https://www.icourse163.org/course/BUPT-1003557006"><img src="../../static/image/10004.png" alt=""></a>
+                    </div>
+                    <div class="txt">
+                        <h3><a href="https://www.icourse163.org/course/BUPT-1003557006">Linux开发环境及应用</a></h3>
+                        <p>来源:mooc</a></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="pic">
+                        <a href="https://www.icourse163.org/learn/ECNU-1206500807?tid=1461498462#/learn/announce"><img src="../../static/image/10005.png" alt=""></a>
+                    </div>
+                    <div class="txt">
+                        <h3><a href="https://www.icourse163.org/learn/ECNU-1206500807?tid=1461498462#/learn/announce">Java核心技术(高阶)</a></h3>
+                        <p>来源:mooc</a></p>
+                    </div>
+                </li>
+                <li class="nomargin">
+                    <div class="pic">
+                        <a href="https://ant.design/index-cn"><img src="../../static/image/10006.png" alt=""></a>
+                    </div>
+                    <div class="txt">
+                        <h3><a href="https://ant.design/index-cn">Ant Design</a></h3>
+                        <p>UNINE</a>来源:anti design</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 排行榜 -->
+    <div class="index_rank">
+        <div class="index_rank_con">
+            <h2 class="tit">排行榜</h2>
+            <ul class="index_rank_list">
+                <li class="list_item first">
+                    <h3>编程语言</h3>
+                    <i></i>
+                    <ul class="item_del">
+                        <li>
+                            <div class="num">1</div>
+                            <div class="del_tx">
+                                <p><a href="#">Python高级编程</a></p>
+                                <p><a href="#">作者：Tarek Ziadé</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="num">2</div>
+                            <div class="del_tx">
+                                <p><a href="#">Java编程思想 （第4版）</a></p>
+                                <p><a href="#">作者：Bruce Eckel</a></p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list_item second">
+                    <h3>算法</h3>
+                    <i></i>
+                    <ul class="item_del">
+                        <li>
+                            <div class="num">1</div>
+                            <div class="del_tx">
+                                <p><a href="#">算法导论</a></p>
+                                <p><a href="#">作者：Thomas H. Corme</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="num">2</div>
+                            <div class="del_tx>
+                                <p><a href="#">算法之美</a></p>
+                                <p><a href="#">作者：[美]布莱恩·克里斯汀</a></p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list_item third">
+                    <h3>人工智能</h3>
+                    <i></i >
+                    <ul class="item_del">
+                        <li>
+                            <div class="num">1</div>
+                            <div class="del_tx>
+                                <p><a href="#">元素识别和机器学习</a></p>
+                                <p><a href="#">作者：Christoper M. Bishop</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>2</div>
+                            <div>
+                                <p><a href="#">Deep Learning</a></p>
+                                <p><a href="#">作者：Ian Goodfellow, Yuoshua Bengio</a></p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list_item fourth">
+                    <h3>数据库开发</h3>
+                    <i></i>
+                    <ul class="item_del">
+                        <li>
+                            <div class="num">1</div>
+                            <div class="del_tx">
+                                <p><a href="#">MySQL必知必会</a></p>
+                                <p><a href="#">作者：Ben Forta</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>2</div>
+                            <div>
+                                <p><a href="#">MySQL技术内幕——InnoDB存储引擎</a></p>
+                                <p><a href="#"></a>作者：姜承尧</p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list_item fifth nomargin">
+                    <h3>网络编程</h3>
+                    <i></i>
+                    <ul class="item_del">
+                        <li>
+                            <div class="num">1</div>
+                            <div class="del_tx">
+                                <p><a href="#">TCP/IP网络编程</a></p>
+                                <p><a href="#">作者：尹圣雨</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>2</div>
+                            <div>
+                                <p><a href="#">C++网络编程（卷1）</a></p>
+                                <p><a href="#">作者：Douglas C.Schmidt，Stephen D.Huston</a></p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="foot">
+        <div class="foot_con">
+            <div class="con_top">
+                <div class="download">
+                    <h3 class="bt"><a href="#">关注Cyberpunk github进程</a></h3>
+                    
+                    <ul class="down_list">
+                        <li class="down_item">
+                            <a href="#">
+                                <i></i>
+                                <span>了解更多 follow me~ git: AndreKuu</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
+
+    </div><!--end section-->
+    <script data-main="{% static 'js/index.js' %}"></script>
+    <script src="../static/js/require.js"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+	<script type="text/javascript">
+
+        $('#tag_search').click(function () {
+            $('#tag_down').removeClass('active');
+            $(this).addClass('active');
+            $('#tab_search').show();
+            $('#tab_down').hide();
+        });
+
+        $('#tag_down').click(function () {
+            $('#tag_search').removeClass('active');
+            $(this).addClass('active');
+            $('#tab_search').hide();
+            $('#tab_down').show();
+        });
+    </script>
+
+{% endblock  %}
